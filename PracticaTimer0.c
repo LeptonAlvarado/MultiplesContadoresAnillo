@@ -34,14 +34,14 @@ void main ()
     set_tris_b(0x00);
     set_tris_c(0x00); //Se inicializa el puerto 0 es de salida y 1 de entrada
     set_tris_d(0x00);
-    int ledsA = 1, ledsB =1, ledsC = 1, ledsD = 1;
+    int ledsA = 1, ledsB =128, ledsC = 1, ledsD = 128;
     while(TRUE)
     {
        if(count==1){
            output_b(ledsB);
-           ledsB *= 2;
-           if(ledsB == 256)
-              ledsB=1;
+           ledsB /= 2;
+           if(ledsB == 1)
+              ledsB=128;
            count = 0;
        }
        if(count3 == 5){
@@ -60,12 +60,10 @@ void main ()
        }        
        if(count4 == 10){
            output_d(ledsD);
-           ledsD *=2;
-           if(ledsD == 256)
-               ledsD =1;
+           ledsD /=2;
+           if(ledsD == 1)
+               ledsD = 128;
            count4 = 0;
-       }
-       
-         
+       }     
     }
 }
