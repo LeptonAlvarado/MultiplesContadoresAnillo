@@ -1,5 +1,5 @@
 #include<18F4620.h>
-#fuses HS, NOFCMEN, NOIESO, PUT, NOBROWNOUT, NOWDT
+#fuses HS, NOFCMEN, NOIESO, PUT, NOBROWNOUT, NOWDT, INTRC_IO
 #fuses NOPBADEN, /*NOMCLR,*/ STVREN, NOLVP, NODEBUG
 #use delay(clock=16000000)
 #use fast_io(a)
@@ -25,7 +25,7 @@ void timer0()
  
 void main ()
 {
-    setup_oscillator(OSC_16MHZ);
+    //setup_oscillator(OSC_16MHZ);
     setup_timer_0(rtcc_internal|rtcc_div_8);
     set_timer0(15536);
     enable_interrupts(INT_TIMER0);
