@@ -1,5 +1,5 @@
 #include<18F4620.h>
-#fuses HS, NOFCMEN, NOIESO, PUT, NOBROWNOUT, NOWDT, INTRC_IO
+#fuses HS, NOFCMEN, NOIESO, PUT, NOBROWNOUT, NOWDT
 #fuses NOPBADEN, /*NOMCLR,*/ STVREN, NOLVP, NODEBUG
 #use delay(clock=16000000)
 #use fast_io(a)
@@ -12,8 +12,8 @@ int count = 0;
 int count2= 0;
 int count3= 0;
 int count4= 0;
-#int_timer0
 
+#int_timer0
 void timer0()
 {
     count++;
@@ -26,10 +26,11 @@ void timer0()
 void main ()
 {
     //setup_oscillator(OSC_16MHZ);
-    setup_timer_0(rtcc_internal|rtcc_div_8);
+    setup_timer_0(T0_INTERNAL|rtcc_div_8);
     set_timer0(15536);
     enable_interrupts(INT_TIMER0);
     enable_interrupts(GLOBAL);
+    setup_adc_ports(NO_ANALOGS);
     set_tris_a(0x00); 
     set_tris_b(0x00);
     set_tris_c(0x00); //Se inicializa el puerto 0 es de salida y 1 de entrada
@@ -40,7 +41,7 @@ void main ()
        if(count==1){
            output_b(ledsB);
            ledsB /= 2;
-           if(ledsB == 1)
+           if(ledsB == 0)
               ledsB=128;
            count = 0;
        }
@@ -61,7 +62,7 @@ void main ()
        if(count4 == 10){
            output_d(ledsD);
            ledsD /=2;
-           if(ledsD == 1)
+           if(ledsD == 0)
                ledsD = 128;
            count4 = 0;
        }     
